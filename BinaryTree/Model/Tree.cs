@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Model
 {
+    /// <summary>
+    /// Бинарное дерево.
+    /// </summary>
+    /// <typeparam name="T">Тип хранимых в узле данных.</typeparam>
     class Tree<T>
         where T : IComparable
     {
+        /// <summary>
+        /// Корневой узел.
+        /// </summary>
         public Node<T> Root { get; set; }
 
+        /// <summary>
+        /// Добавить узел.
+        /// </summary>
+        /// <param name="data">Данные.</param>
         public void Add(T data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data), "Данные не могут быть null");
+            }
+
             if (Root == null)
             {
                 Root = new Node<T>(data); ;
@@ -21,6 +37,10 @@ namespace BinaryTree.Model
             Root.Add(data);
         }
 
+        /// <summary>
+        /// Префиксный обход.
+        /// </summary>
+        /// <returns>Список элементов дерева.</returns>
         public List<T> PreOrder()
         {
             if (Root != null)
@@ -31,6 +51,12 @@ namespace BinaryTree.Model
             return default;
         }
 
+        /// <summary>
+        /// Префиксный обход.
+        /// </summary>
+        /// <param name="node">Корневой узел.</param>
+        /// <param name="result">Список элементов дерева.</param>
+        /// <returns>Список элементов дерева.</returns>
         private List<T> PreOrder(Node<T> node, List<T> result)
         {
             result.Add(node.Data);
@@ -48,6 +74,10 @@ namespace BinaryTree.Model
             return result;
         }
 
+        /// <summary>
+        /// Постфиксный обход.
+        /// </summary>
+        /// <returns>Список элементов дерева.</returns>
         public List<T> PostOrder()
         {
             if (Root != null)
@@ -58,6 +88,12 @@ namespace BinaryTree.Model
             return default;
         }
 
+        /// <summary>
+        /// Постфиксный обход.
+        /// </summary>
+        /// <param name="node">Корневой узел</param>
+        /// <param name="result">Список элементов дерева.</param>
+        /// <returns>Список элементов дерева.</returns>
         private List<T> PostOrder(Node<T> node, List<T> result)
         {
             if (node.Left != null)
@@ -75,6 +111,10 @@ namespace BinaryTree.Model
             return result;
         }
 
+        /// <summary>
+        /// Инфиксный обход.
+        /// </summary>
+        /// <returns>Список элементов дерева.</returns>
         public List<T> InOrder()
         {
             if (Root != null)
@@ -85,6 +125,12 @@ namespace BinaryTree.Model
             return default;
         }
 
+        /// <summary>
+        /// Инфиксный обход.
+        /// </summary>
+        /// <param name="node">Корневой узел.</param>
+        /// <param name="result">Список элементов дерева.</param>
+        /// <returns>Список элементов дерева.</returns>
         private List<T> InOrder(Node<T> node, List<T> result)
         {
             if (node.Left != null)
